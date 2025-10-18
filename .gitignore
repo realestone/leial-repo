@@ -1,0 +1,16 @@
+# Node / backend
+node_modules/
+.env
+postgres-data/
+
+# Expo / React Native
+.expo/
+.expo-shared/
+android/
+ios/
+web-build/
+
+# VSCode / system
+.vscode/
+.DS_Store
+Thumbs.db
