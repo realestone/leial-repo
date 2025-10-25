@@ -1,18 +1,19 @@
-// CHANGE this to your LAN IP from earlier (192.168.1.9)
-export const BASE_URL = "http://192.168.1.9:4000";
+import { BASE_URL, USER_ID } from "./config";
 
-export async function getReceipts() {
-  const res = await fetch(`${BASE_URL}/receipts`);
-  if (!res.ok) throw new Error("Failed to fetch receipts");
-  return res.json();
-}
-
-export async function createReceipt(payload) {
+export async function createReceipt({ merchant_name, total_nok }) {
+  const payload = {
+    user_id: USER_ID,
+    merchant_name,
+    total_cents: Math.round(Number(total_nok) * 100) // "99" NOK -> 9900 cents
+  };
   const res = await fetch(`${BASE_URL}/receipts`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
-  if (!res.ok) throw new Error(await res.text());
-  return res.json();
+  const data = await res.json();
+  if (!res.ok) throw new Error(JSON.stringify(data));
+  return data;
 }
+
+

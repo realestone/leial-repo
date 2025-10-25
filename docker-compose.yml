@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:16
+    image: postgres:18
     container_name: loyalty-db
     environment:
       POSTGRES_USER: postgres
@@ -9,4 +9,4 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql   # <-- parent path for 18+
