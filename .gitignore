@@ -14,3 +14,45 @@ web-build/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# 🧪 Test / coverage artifacts
+coverage/
+*.lcov
+.vitest/
+jest-cache/
+.nyc_output/
+.tap/
+
+# 🐛 Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# ⚙️ Build / dist outputs
+dist/
+build/
+out/
+tmp/
+temp/
+
+# 🧰 Runtime caches
+.cache/
+.eslintcache
+.stylelintcache
+
+# 🚀 Deployment / CI generated
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pid
+*.seed
+*.db
+
+# 🪣 System / misc
+*.swp
+*.swo
+*.bak
+*.tmp
