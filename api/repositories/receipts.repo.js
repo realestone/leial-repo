@@ -1,5 +1,11 @@
 import { pool } from "../db.js";
 
+
+
+
+
+
+
 export async function insertReceipt(client, { user_id, merchant_name, total_cents, currency, purchased_at, dedupe_hash }) {
   const sql = `
     INSERT INTO receipts (user_id, merchant_name, total_cents, currency, purchased_at, dedupe_hash)
@@ -13,11 +19,21 @@ export async function insertReceipt(client, { user_id, merchant_name, total_cent
 
 export async function listReceipts(limit = 100) {
   const { rows } = await pool.query(
-    `SELECT id, user_id, merchant_name, total_cents, currency, purchased_at, created_at,
-            ROUND(total_cents / 100.0)::int AS points
-     FROM receipts
-     ORDER BY created_at DESC
-     LIMIT $1`,
+      `
+    SELECT
+      id,
+      user_id,
+      merchant_name,
+      total_cents,
+      currency,
+      purchased_at,
+      created_at,
+      -- 1 point per NOK (cents/100), integer
+      ROUND(total_cents / 100.0)::int AS points
+    FROM receipts
+    ORDER BY created_at DESC
+    LIMIT $1
+    `,
     [Math.max(1, Math.min(limit, 500))]
   );
   return rows;

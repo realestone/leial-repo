@@ -7,8 +7,11 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "dev": "node server.js",
     "start": "node server.js",
-    "dev": "node server.js"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:reset": "docker exec -i loyalty-db psql -U postgres -d loyalty -c \"TRUNCATE TABLE rewards, receipts, merchants, merchant_members, users RESTART IDENTITY CASCADE;\""
   },
   "keywords": [],
   "dependencies": {
@@ -16,6 +19,12 @@
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "pg": "^8.16.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "supertest": "^7.1.4",
+    "vitest": "^4.0.3"
   }
 }
