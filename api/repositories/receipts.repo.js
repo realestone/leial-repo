@@ -1,11 +1,6 @@
 import { pool } from "../db.js";
 
 
-
-
-
-
-
 export async function insertReceipt(client, { user_id, merchant_name, total_cents, currency, purchased_at, dedupe_hash }) {
   const sql = `
     INSERT INTO receipts (user_id, merchant_name, total_cents, currency, purchased_at, dedupe_hash)

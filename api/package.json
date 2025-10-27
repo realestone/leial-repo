@@ -11,8 +11,12 @@
     "start": "node server.js",
     "test": "vitest run",
     "test:watch": "vitest",
-    "db:reset": "docker exec -i loyalty-db psql -U postgres -d loyalty -c \"TRUNCATE TABLE rewards, receipts, merchants, merchant_members, users RESTART IDENTITY CASCADE;\""
+    "seed": "node scripts/seed.js",
+    "db:migrate": "powershell -NoProfile -Command \"Get-ChildItem ./sql/*.sql | Sort-Object Name | ForEach-Object { Write-Host \\\"Applying\\\" $_.Name; Get-Content $_.FullName | docker exec -i loyalty-db psql -U postgres -d loyalty -v ON_ERROR_STOP=1 }\"",
+    "db:reset": "docker exec -i loyalty-db psql -U postgres -d loyalty -c \"TRUNCATE TABLE rewards, receipts, merchant_members, merchants, users RESTART IDENTITY CASCADE;\""
+
   },
+  
   "keywords": [],
   "dependencies": {
     "cors": "^2.8.5",
